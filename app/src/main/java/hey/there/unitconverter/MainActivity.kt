@@ -11,8 +11,6 @@ class MainActivity : AppCompatActivity() {
     private var convert: Button? = null
     private var textview: TextView? = null
     private var answer: TextView? = null
-    private var value:Double? =null
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,23 +36,23 @@ class MainActivity : AppCompatActivity() {
         )
 
         convert?.setOnClickListener {
-            value = editText!!.text.toString().toDouble()
-            if (value !=null) {
+            if (editText!!.text.isEmpty()){
+                Toast.makeText(this,"enter the value first",Toast.LENGTH_LONG).show()
+            }else {
+                val value = editText!!.text.toString().toDouble()
                 if (spinner1?.selectedItem == "meter"
                     && spinner2?.selectedItem == "centimeter"
                 ) {
-                    answer?.text = (value!! * 100).toString()
+                    answer?.text = (value * 100).toString()
                 } else if (spinner1?.selectedItem == "meter"
                     && spinner2?.selectedItem == "millimeter"
                 ) {
-                    answer?.text = (value!! * 1000).toString()
+                    answer?.text = (value * 1000).toString()
                 } else if (spinner1?.selectedItem == "meter"
                     && spinner2?.selectedItem == "kilometer"
                 ) {
-                    answer?.text = (value!! / 1000).toString()
+                    answer?.text = (value / 1000).toString()
                 }
-            }else{
-                Toast.makeText(this,"enter the value first",Toast.LENGTH_LONG).show()
             }
         }
     }
